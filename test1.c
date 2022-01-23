@@ -10,4 +10,7 @@ int main(){
         printf("%d\n",*ptr);
     }
     ptr = NULL;
+    char s = 'a';
+    printf("%s",s);
+    return 0;
 }
