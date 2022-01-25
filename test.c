@@ -1,19 +1,14 @@
 #include<stdio.h>
+#include<string.h>
 #include<time.h>
 
-static int a = 1;
-int* test(){
-    static int a = 1;
-    printf("%d\n",a);
-    return &a;
-    
-}
-
+struct Person{
+    int age;
+    char name[6];
+};
 int main(){
-    static int a = 1;
-    a = 2;
-    printf("%d\n",a);
-    int *p = test();
-    printf("%p\n",p);
+    struct Person person1;
+    person1.age = 10;
+    printf("%d",person1);
     return 0;
 }
