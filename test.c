@@ -45,6 +45,7 @@ void InsertNode(struct Link* head, int num, int newage){
 int main(){
     int array[] = {1,2,3,4,5,6,7,8,9};
     struct Link* head = createList(array);
+    printf("%d\n",(*head).age);
     InsertNode(head,3,10);
     TraverseList(head);
     free(head);
