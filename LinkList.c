@@ -41,12 +41,22 @@ void InsertNode(struct Link* head, int num, int newage){
     head->next = newnode;
 }
 
+void DelNode(struct Link* head, int num){
+    for(int i=1;i<num;i++){
+        head = head->next;
+    }
+    struct Link*temp = head->next;
+    head->next = temp->next;
+    free(temp);
+    temp = NULL;
+}
+
 
 int main(){
     int array[] = {1,2,3,4,5,6,7,8,9};
     struct Link* head = createList(array);
-    printf("%d\n",(*head).age);
-    InsertNode(head,3,10);
+    InsertNode(head,1,10);
+    DelNode(head,5);
     TraverseList(head);
     free(head);
 }
