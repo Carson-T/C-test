@@ -1,51 +1,33 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<math.h>
 
-char * longestCommonPrefix(char ** strs, int strsSize){
-    int minlen=strlen(strs[0]);
-    for(int i=1;i<strsSize;i++){
-        if(minlen>strlen(strs[i])){
-            minlen = strlen(strs[i]);
+int* getRow(int rowIndex, int* returnSize){
+    int *p = malloc(sizeof(int));
+    p[0] = 1;
+    int *q;
+    for(int i=1;i<=rowIndex;i++){
+        q = malloc(sizeof(int)*(i+1));
+        q[0] = 1;
+        q[i] = 1;
+        for(int j=1;j<i;j++){
+            q[i] = p[j-1]+p[j];
         }
+        free(p);
+        p = q;
     }
-    printf("%d",minlen);
-    int num = 0;
-    char c;
-    for(int i=0;i<minlen;i++){
-        // printf("%s",strs[0]);
-        c = strs[0][i];
-        // printf("%c\n",c);
-        for(int j=1;j<strsSize;j++){
-            // printf("%c\n",strs[j][i]);
-            if(c!=strs[j][i]){
-                i = -1;
-                break;
-            }
-        }
-        if(i==-1)
-            break;
-        num++;
-    }
-    if(num>0){
-        char * result = (char*)malloc(sizeof(char)*(num+1));
-        for(int i=0;i<num;i++){
-            result[i] = strs[0][i];
-        }
-        result[num] = '\0';
-        return result;
-    }else{
-        return "";
-    }
-    
+    *returnSize = rowIndex+1;
+    return p;
 }
-
 int main(){
-    // char *input[] = {"flower","flow","flight"};
-    // char *s = longestCommonPrefix(input,3);
-    // printf("%s",s);
-    if('{'){
-        printf("%d",1);
+    int *returnSize = malloc(sizeof(int));
+    int row = 2;
+    int *p = getRow(row,returnSize);
+    for(int i=0;i<row+1;i++){
+        printf("%d ",p[i]);;
     }
+    free(returnSize);
+    free(p);
     return 0;
 }
