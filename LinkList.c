@@ -8,7 +8,7 @@ typedef struct Link{
     struct Link *next;
 }*Linklist;
 
-void createList(int *array, Linklist head){
+void createList(int *array, Linklist head){  
     Linklist tmp = head;
     for(int i;i<9;i++){
         Linklist node = (Linklist)malloc(sizeof(Linklist));
@@ -22,9 +22,10 @@ void createList(int *array, Linklist head){
 }
 
 void TraverseList(Linklist head){
-    while(head->next){
-        printf("%d ",head->next->elm);
-        head = head->next;
+    Linklist p = head;
+    while(p->next){
+        printf("%d ",p->next->elm);
+        p = p->next;
     }
     
 }
@@ -33,7 +34,7 @@ Linklist ReverseList(Linklist head){
     Linklist FirstPtr = NULL, SecPtr = NULL, TempPtr = NULL;
     FirstPtr = head->next;
     SecPtr = FirstPtr->next;
-    FirstPtr->next = NULL;//将第一个结点指针置空
+    FirstPtr->next = NULL;
     while (SecPtr)
     {
         TempPtr = SecPtr->next;
@@ -65,13 +66,33 @@ void DelNode(Linklist head, int num){
     temp = NULL;
 }
 
+void InsertSort(Linklist head){    //直接插入递增排序
+    Linklist tmp;
+    Linklist p = head->next;
+    Linklist q = p->next;
+    p->next = NULL;
+    p = q;
+    while(p!=NULL){
+        tmp = head;
+        q = p->next;
+        while(tmp->next!=NULL && p->elm>tmp->next->elm){
+            tmp = tmp->next;
+        }
+        p->next = tmp->next;
+        tmp->next = p;
+        p = q;
+    }
+}
 
 int main(){
-    int array[] = {1,2,3,4,5,6,7,8,9};
+    int array[] = {23,32,3,41,25,33,7,12,39};
     Linklist head = (Linklist)malloc(sizeof(Linklist));
     createList(array,head);
     // InsertNode(head,1,10);
     // DelNode(head,5);
+    TraverseList(head);
+    printf("\n");
+    InsertSort(head);
     TraverseList(head);
     printf("\n");
     head = ReverseList(head);
