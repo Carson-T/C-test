@@ -39,5 +39,10 @@ int main(){
         pop(&mystack,&a);
         printf("%d ",a);
     }
+    char *d = "asdf";
+    char *p = d;
+    char *q = d;
+    // *p = 'q';
+    printf("%p %p",p,q);
     return 0;
 }
